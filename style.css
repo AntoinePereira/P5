@@ -1,0 +1,58 @@
+@font-face {
+		font-family: 'ScaryCandy';
+		src: url('assets/ScaryCandy.otf');
+}
+ @font-face{   
+		font-family: 'BerenisADFPro-Regular';
+		src: url('assets/BerenisADFPro-Regular.otf');
+}
+
+
+
+
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+} 
+header{
+	background-color: #f0e6f2;
+	width: 100vw;
+	text-align: center;
+}
+h1{
+	font-family: ScaryCandy; 
+	font-size: 4em;
+	margin: 0.4em;
+}
+main{
+	min-height: 60vh;
+	text-align: center;
+	font-family: BerenisADFPro-Regular;
+}
+footer{
+	background-color: #f0e6f2;
+	width: 100vw;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	
+}
+footer h2{
+	font-family: ScaryCandy;
+	font-size: 3em;
+	margin: 0.5em;
+	padding-left: 0.3em;
+}
+footer div{
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: flex-end;
+	padding: 1.5em;
+}
+footer p{
+	margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
