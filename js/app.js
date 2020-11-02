@@ -1,21 +1,22 @@
 const requestTeddies = new XMLHttpRequest();
 
 requestTeddies.onreadystatechange = function() {
-    if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-        const teddies = JSON.parse(this.responseText);
-        console.log(teddies);
+	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+  const teddies = JSON.parse(this.responseText);
+  console.log(teddies);
 
-        let divParent = document.getElementById('divJS');
+  let divParent = document.getElementById('divJS');
 
-		teddies.forEach((item) => {
-        	const divWrapper = document.createElement("div");
+	teddies.forEach((item) => {
+    const divWrapper = document.createElement("div");
 
-        	addTitle(item, divWrapper)
-        	addImage(item, divWrapper)
+    addTitle(item, divWrapper);
+    addImageInLink(item, divWrapper);
+    
 
-        	divParent.appendChild(divWrapper);
-        })
-    }
+    divParent.appendChild(divWrapper);
+    })
+  }
 };
 
 
@@ -24,7 +25,12 @@ function addTitle(item, divParent){
 	title.innerHTML = item.name;
 	divParent.appendChild(title);
 }
-
+function addImageInLink(item, divParent){
+	const link = document.createElement('a');
+	link.href = "http://localhost:3000/api/teddies/"+ item._id;
+	divParent.appendChild(link);
+	addImage(item, link);
+}
 function addImage(item, divParent){
 	const image = document.createElement('img');
 	image.src = item.imageUrl;
@@ -33,6 +39,7 @@ function addImage(item, divParent){
 
 requestTeddies.open("GET", " http://localhost:3000/api/teddies/");
 requestTeddies.send();
+
 
 
 
