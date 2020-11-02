@@ -6,10 +6,6 @@
 		font-family: 'BerenisADFPro-Regular';
 		src: url('assets/BerenisADFPro-Regular.otf');
 }
-
-
-
-
 .container{
 	display: flex;
 	flex-direction: column;
@@ -30,13 +26,22 @@ main{
 	text-align: center;
 	font-family: BerenisADFPro-Regular;
 }
+#divJS{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+
+}
+#divJS img{
+	width: 60vw;
+}
 footer{
 	background-color: #f0e6f2;
 	width: 100vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	
+	margin: 3em;
 }
 footer h2{
 	font-family: ScaryCandy;
@@ -45,7 +50,6 @@ footer h2{
 	padding-left: 0.3em;
 }
 footer div{
-	
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
