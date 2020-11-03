@@ -1,7 +1,7 @@
 const requestTeddies = new XMLHttpRequest();
 
 requestTeddies.onreadystatechange = function() {
-	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
   const teddies = JSON.parse(this.responseText);
   console.log(teddies);
 
@@ -27,7 +27,7 @@ function addTitle(item, divParent){
 }
 function addImageInLink(item, divParent){
 	const link = document.createElement('a');
-	link.href = "http://localhost:3000/api/teddies/"+ item._id;
+	link.href = "produit.html?id="+ item._id;
 	divParent.appendChild(link);
 	addImage(item, link);
 }
