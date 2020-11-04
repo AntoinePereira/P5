@@ -1,20 +1,20 @@
 const requestTeddies = new XMLHttpRequest();
 
 requestTeddies.onreadystatechange = function() {
-if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-  const teddies = JSON.parse(this.responseText);
-  console.log(teddies);
+	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+	  const teddies = JSON.parse(this.responseText);
+	  console.log(teddies);
 
-  let divParent = document.getElementById('divJS');
+	  let divParent = document.getElementById('divJS');
 
-	teddies.forEach((item) => {
-    const divWrapper = document.createElement("div");
+		teddies.forEach((item) => {
+	    const divWrapper = document.createElement("div");
 
-    addTitle(item, divWrapper);
-    addImageInLink(item, divWrapper);
-    
+	    addTitle(item, divWrapper);
+	    addImageInLink(item, divWrapper);
+	    
 
-    divParent.appendChild(divWrapper);
+	    divParent.appendChild(divWrapper);
     })
   }
 };
