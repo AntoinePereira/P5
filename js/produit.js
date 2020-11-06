@@ -4,7 +4,24 @@ function getId(){
 	return id;
 }
 const id = getId();
-console.log(id); 
+
+const request = new XMLHttpRequest();
+request.open("GET", " http://localhost:3000/api/teddies/" + id);
+
+request.onreadystatechange = function() {
+	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+	  const tedInfo = JSON.parse(this.responseText);
+
+		addProduct(tedInfo);
+		//addOptionSelector(tedInfo);
+		addCommandButton(tedInfo);
+	}
+};
+request.onerror = function(){
+	let divParent = document.getElementById('productContainer');
+	divParent.innerHTML = "<h1>ERROR</h1>";
+}
+request.send();
 
 function addProduct(tedInfo){
 	let divParent = document.getElementById('productContainer');
@@ -21,6 +38,10 @@ function addProduct(tedInfo){
 	description.innerHTML = tedInfo.description;
 	divParent.appendChild(description);
 
+	const price = document.createElement('div');
+	price.innerHTML = tedInfo.price + '$';
+	divParent.appendChild(price);
+
 	const colorSelector = document.createElement('select');
 	const defaultOption = document.createElement('option');
 	defaultOption.innerHTML = "Choisir la couleur";
@@ -31,26 +52,39 @@ function addProduct(tedInfo){
 		const colorOption = document.createElement('option');
 		colorOption.innerHTML = color;
 		colorSelector.appendChild(colorOption);
-
 	})
-
-	const price = document.createElement('div');
-	price.innerHTML = tedInfo.price + '$';
-	divParent.appendChild(price);
-
+}
+/*function addOptionSelector(tedInfo){
+	let divParent = document.getElementById('productContainer');
+	const colorSelector = document.createElement('select');
+	const defaultOption = document.createElement('option');
+	defaultOption.innerHTML = "Choisir la couleur";
+	colorSelector.appendChild(defaultOption);
+	divParent.appendChild(colorSelector);
+}*/
+function addCommandButton(tedInfo){
+	let divParent = document.getElementById('productContainer');
 	const btn = document.createElement('button');
 	btn.innerHTML = 'Ajouter au panier';
 	divParent.appendChild(btn);
+
+	btn.addEventListener('click', addToBasket);
+	console.log(tedInfo);
 }
-const request = new XMLHttpRequest();
-
-request.onreadystatechange = function() {
-	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-	  const tedInfo = JSON.parse(this.responseText);
-	  console.log(tedInfo);
-
-	  addProduct(tedInfo);
+function addToBasket(tedInfo){
+	console.log('Ajouter au panier');
+	let basketContent = JSON.parse(localStorage.getItem('basketContent'));
+	if (basketContent === null){
+		basketContent = [];
 	}
-};
-request.open("GET", " http://localhost:3000/api/teddies/" + id);
-request.send();
+	let product = {
+		Name : tedInfo.name,
+		Price : tedInfo.price
+	};
+
+	console.log(product);
+	basketContent.push(product);
+	localStorage.setItem('basketBear', JSON.stringify(basketContent));
+}
+
+
