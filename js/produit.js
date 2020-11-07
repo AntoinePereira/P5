@@ -62,29 +62,30 @@ function addProduct(tedInfo){
 	colorSelector.appendChild(defaultOption);
 	divParent.appendChild(colorSelector);
 }*/
+
 function addCommandButton(tedInfo){
 	let divParent = document.getElementById('productContainer');
 	const btn = document.createElement('button');
 	btn.innerHTML = 'Ajouter au panier';
 	divParent.appendChild(btn);
 
-	btn.addEventListener('click', addToBasket);
+	btn.addEventListener('click', addToLocalStorage);
 	console.log(tedInfo);
 }
-function addToBasket(tedInfo){
-	console.log('Ajouter au panier');
+
+function addToLocalStorage(tedInfo){
 	let basketContent = JSON.parse(localStorage.getItem('basketContent'));
 	if (basketContent === null){
 		basketContent = [];
 	}
 	let product = {
-		Name : tedInfo.name,
-		Price : tedInfo.price
+		'Name' : tedInfo.name,//-----------------------------------------------------------
+		'Price' : tedInfo.price
 	};
 
 	console.log(product);
 	basketContent.push(product);
-	localStorage.setItem('basketBear', JSON.stringify(basketContent));
+	localStorage.setItem('basketContent', JSON.stringify(basketContent));
 }
 
 
