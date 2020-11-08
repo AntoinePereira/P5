@@ -14,7 +14,7 @@ request.onreadystatechange = function() {
 
 		addProduct(tedInfo);
 		//addOptionSelector(tedInfo);
-		addCommandButton(tedInfo);
+		addCommandButton();
 	}
 };
 request.onerror = function(){
@@ -63,29 +63,39 @@ function addProduct(tedInfo){
 	divParent.appendChild(colorSelector);
 }*/
 
-function addCommandButton(tedInfo){
+function addCommandButton(){
 	let divParent = document.getElementById('productContainer');
 	const btn = document.createElement('button');
 	btn.innerHTML = 'Ajouter au panier';
 	divParent.appendChild(btn);
 
-	btn.addEventListener('click', addToLocalStorage);
-	console.log(tedInfo);
-}
-
-function addToLocalStorage(tedInfo){
-	let basketContent = JSON.parse(localStorage.getItem('basketContent'));
+	btn.addEventListener('click', function(tedInfo){
+		let basketContent = JSON.parse(localStorage.getItem('basketContent'));
 	if (basketContent === null){
 		basketContent = [];
 	}
 	let product = {
-		'Name' : tedInfo.name,//-----------------------------------------------------------
+		'Name' : tedInfo.name,
 		'Price' : tedInfo.price
 	};
 
 	console.log(product);
 	basketContent.push(product);
 	localStorage.setItem('basketContent', JSON.stringify(basketContent));
+	});
 }
 
+/*function addToLocalStorage(tedInfo){
+	let basketContent = JSON.parse(localStorage.getItem('basketContent'));
+	if (basketContent === null){
+		basketContent = [];
+	}
+	let product = {
+		'Name' : tedInfo.name,
+		'Price' : tedInfo.price
+	};
 
+	console.log(product);
+	basketContent.push(product);
+	localStorage.setItem('basketContent', JSON.stringify(basketContent));
+}*/
