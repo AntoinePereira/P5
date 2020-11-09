@@ -71,17 +71,17 @@ function addCommandButton(){
 
 	btn.addEventListener('click', function(tedInfo){
 		let basketContent = JSON.parse(localStorage.getItem('basketContent'));
-	if (basketContent === null){
+		if (basketContent === null){
 		basketContent = [];
-	}
-	let product = {
+		}
+		let product = {
 		'Name' : tedInfo.name,
 		'Price' : tedInfo.price
-	};
+		};
 
-	console.log(product);
-	basketContent.push(product);
-	localStorage.setItem('basketContent', JSON.stringify(basketContent));
+		console.log(product);
+		basketContent.push(product);
+		localStorage.setItem('basketContent', JSON.stringify(basketContent));
 	});
 }
 
