@@ -33,7 +33,7 @@ function addTitle(item, divParent){
 }
 function addImageInLink(item, divParent){
 	const link = document.createElement('a');
-	link.href = "produit.html?id="+ item._id;
+	link.href = "show.html?id="+ item._id;
 	divParent.appendChild(link);
 	addImage(item, link);
 }

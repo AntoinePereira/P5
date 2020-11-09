@@ -6,7 +6,7 @@ function fillBasket(){
 
 		addName(item, divWrapper);
 		addPrice(item, divWrapper); 
-		giveTotalPrice(item);
+		console.log(item.price);
 		divParent.appendChild(divWrapper);
 })
 }
@@ -19,11 +19,23 @@ function addName(item, divParent){
 }
 function addPrice (item, divParent){
 	let price = document.createElement('h4');
-	price.innerHTML = item.price;
+	price.innerHTML = 'Prix : ' + item.price + '$';
 	divParent.appendChild(price);
 }
+	
+function giveTotalPrice(){
+	let basketContent = JSON.parse(localStorage.basketContent);	
+console.log(basketContent)
+	for (var i = 0; i < basketContent.length; i++){
+		console.log(i);
+		let x = basketContent.price(i);
 
-function giveTotalPrice(item){
-	console.log(item.price);
+    //$('body').append(localStorage.getItem(localStorage.key(i)));
+  }
+
 }
+
+giveTotalPrice();
+
+
 

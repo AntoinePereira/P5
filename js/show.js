@@ -13,8 +13,8 @@ request.onreadystatechange = function() {
 	  const tedInfo = JSON.parse(this.responseText);
 
 		addProduct(tedInfo);
-		//addOptionSelector(tedInfo);
-		addCommandButton();
+		addOptionSelector(tedInfo);
+		addCommandButton(tedInfo);
 	}
 };
 request.onerror = function(){
@@ -41,7 +41,10 @@ function addProduct(tedInfo){
 	const price = document.createElement('div');
 	price.innerHTML = tedInfo.price + '$';
 	divParent.appendChild(price);
+}
 
+function addOptionSelector(tedInfo){
+	let divParent = document.getElementById('productContainer');
 	const colorSelector = document.createElement('select');
 	const defaultOption = document.createElement('option');
 	defaultOption.innerHTML = "Choisir la couleur";
@@ -54,48 +57,22 @@ function addProduct(tedInfo){
 		colorSelector.appendChild(colorOption);
 	})
 }
-/*function addOptionSelector(tedInfo){
-	let divParent = document.getElementById('productContainer');
-	const colorSelector = document.createElement('select');
-	const defaultOption = document.createElement('option');
-	defaultOption.innerHTML = "Choisir la couleur";
-	colorSelector.appendChild(defaultOption);
-	divParent.appendChild(colorSelector);
-}*/
 
-function addCommandButton(){
-	let divParent = document.getElementById('productContainer');
-	const btn = document.createElement('button');
-	btn.innerHTML = 'Ajouter au panier';
-	divParent.appendChild(btn);
-
-	btn.addEventListener('click', function(tedInfo){
+function addCommandButton(tedInfo){
+	const btn = document.getElementById('btn');
+	btn.addEventListener('click', function(){
 		let basketContent = JSON.parse(localStorage.getItem('basketContent'));
 		if (basketContent === null){
 		basketContent = [];
 		}
+		
 		let product = {
-		'Name' : tedInfo.name,
-		'Price' : tedInfo.price
+		'name' : tedInfo.name,
+		'price' : tedInfo.price
 		};
 
-		console.log(product);
 		basketContent.push(product);
 		localStorage.setItem('basketContent', JSON.stringify(basketContent));
 	});
 }
 
-/*function addToLocalStorage(tedInfo){
-	let basketContent = JSON.parse(localStorage.getItem('basketContent'));
-	if (basketContent === null){
-		basketContent = [];
-	}
-	let product = {
-		'Name' : tedInfo.name,
-		'Price' : tedInfo.price
-	};
-
-	console.log(product);
-	basketContent.push(product);
-	localStorage.setItem('basketContent', JSON.stringify(basketContent));
-}*/
