@@ -23,16 +23,18 @@ function addPrice (item, divParent){
 	divParent.appendChild(price);
 }
 	
+
+
+
 function giveTotalPrice(){
 	let basketContent = JSON.parse(localStorage.basketContent);	
-console.log(basketContent)
-	for (var i = 0; i < basketContent.length; i++){
-		console.log(i);
-		let x = basketContent.price(i);
-
-    //$('body').append(localStorage.getItem(localStorage.key(i)));
-  }
-
+	let sum = null;
+	basketContent.forEach(function(value, index, array){
+		sum += value.price;
+	});
+console.log(sum);
+let divWrapper = document.getElementById('total');
+divWrapper.innerHTML = sum + '$';
 }
 
 giveTotalPrice();
