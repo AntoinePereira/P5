@@ -30,22 +30,20 @@ function displayTotalPrice(){
 		sum += value.price;
 	});
 	divWrapper.innerHTML = sum + '$';
-
 console.log(sum);
 }
 displayTotalPrice();
 
 
+function sendOrder(){
 
-/*function sendOrder(sum){
-	let name = document.getElementById('name').value;
-	let firstName = document.getElementById('firstname').value;
-	let mail = document.getElementById('mail').value;
-	let adress = document.getElementById('adress').value;
-	let btn = document.getElementById('btn');
-	btn.addEventListener('click', function(){
-		console.log(sum);
-		console.log(firstname);
-	});
+	const order = {
+    contact: {},
+    products: [],
+	}	
+	btn = document.getElementById('btn');
+	btn.addEventListener('click', (event) => {
+		let contact = new 
+	})
 }
-sendOrder();*/
+sendOrder();
