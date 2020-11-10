@@ -6,7 +6,6 @@ function fillBasket(){
 
 		addName(item, divWrapper);
 		addPrice(item, divWrapper); 
-		console.log(item.price);
 		divParent.appendChild(divWrapper);
 })
 }
@@ -23,21 +22,30 @@ function addPrice (item, divParent){
 	divParent.appendChild(price);
 }
 	
-
-
-
-function giveTotalPrice(){
+function displayTotalPrice(){
 	let basketContent = JSON.parse(localStorage.basketContent);	
+	let divWrapper = document.getElementById('total');
 	let sum = null;
 	basketContent.forEach(function(value, index, array){
 		sum += value.price;
 	});
+	divWrapper.innerHTML = sum + '$';
+
 console.log(sum);
-let divWrapper = document.getElementById('total');
-divWrapper.innerHTML = sum + '$';
 }
-
-giveTotalPrice();
-
+displayTotalPrice();
 
 
+
+/*function sendOrder(sum){
+	let name = document.getElementById('name').value;
+	let firstName = document.getElementById('firstname').value;
+	let mail = document.getElementById('mail').value;
+	let adress = document.getElementById('adress').value;
+	let btn = document.getElementById('btn');
+	btn.addEventListener('click', function(){
+		console.log(sum);
+		console.log(firstname);
+	});
+}
+sendOrder();*/
