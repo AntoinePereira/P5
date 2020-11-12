@@ -35,15 +35,49 @@ console.log(sum);
 displayTotalPrice();
 
 
-function sendOrder(){
-
-	const order = {
-    contact: {},
-    products: [],
-	}	
-	btn = document.getElementById('btn');
-	btn.addEventListener('click', (event) => {
-		let contact = new 
-	})
+function sendOrder(tedInfo){
+	const btn = document.getElementById('btn');
+	btn.addEventListener('click', function(event){
+		event.preventDefault();
+		
+		//creation objets 'contact' et 'products'
+		let contact = {
+		'name' : document.getElementById("name").value,
+		'prenom' : document.getElementById("firstname").value,
+		'email' : document.getElementById("mail").value,
+		'adress' : document.getElementById("adress").value,
+		'city' : document.getElementById('city').value
+		};
+		let products = JSON.parse(localStorage.basketContent);
+		let toBeSent = {contact, products};
+		console.log(toBeSent);
+		sendRequest(toBeSent);
+		//envoi POST request
+		/*var xhr = new XMLHttpRequest();
+		xhr.open('POST', 'http://localhost:3000/api/teddies/order');
+    xhr.onreadystatechange = function() {
+      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+      	var response = JSON.parse(this.response);
+        console.log(xhr.response);
+        //localStorage.setItem('orderId', response.orderId);
+        //document.location.href = 'confirmation.html';
+      } 
+      else {
+        alert('Une erreur est survenue');
+      }
+    };
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(toBeSent));*/
+	});
 }
 sendOrder();
+function sendRequest(toBeSent){
+	fetch (" http://localhost:3000/api/teddies/order", {
+  method: "POST",
+  body: JSON.stringify(toBeSent),
+  headers: {"Content-type": "application/json; charset=UTF-8"}
+});
+.then (response => response)
+.catch(error => console.log(error))
+}
+
