@@ -1,5 +1,9 @@
+let basketContent = JSON.parse(localStorage.basketContent);
+let totalPrice = null;
+
+
 function fillBasket(){
-	let basketContent = JSON.parse(localStorage.basketContent);
+	//let basketContent = JSON.parse(localStorage.basketContent);
 	basketContent.forEach((item) => {
 		let divParent = document.getElementById('divJS');
 		let divWrapper = document.createElement("div");
@@ -23,14 +27,14 @@ function addPrice (item, divParent){
 }
 	
 function displayTotalPrice(){
-	let basketContent = JSON.parse(localStorage.basketContent);	
+	//let basketContent = JSON.parse(localStorage.basketContent);	
 	let divWrapper = document.getElementById('total');
-	let sum = null;
+	//let sum = null;
 	basketContent.forEach(function(value, index, array){
-		sum += value.price;
+		totalPrice += value.price;
 	});
-	divWrapper.innerHTML = sum + '$';
-console.log(sum);
+	divWrapper.innerHTML = totalPrice + '$';
+console.log(totalPrice);
 }
 displayTotalPrice();
 
@@ -60,12 +64,11 @@ function sendOrder(tedInfo){
       if (this.readyState == XMLHttpRequest.DONE) {
       	let confirmation = JSON.parse(this.responseText);
         console.log(confirmation);
-        localStorage.setItem('orderId', JSON.stringify(confirmation));
-        //document.location.href = 'confirmation.html';
+        localStorage.setItem('order', JSON.stringify(confirmation));
+        console.log(totalPrice);
+        localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
+       	document.location.href = 'confirmation.html';
       } 
-      /*else {
-        alert('Une erreur est survenue');
-      }*/
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(toBeSent));
