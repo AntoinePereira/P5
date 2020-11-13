@@ -48,37 +48,27 @@ function sendOrder(tedInfo){
 		'city' : document.getElementById('city').value,
 		'email' : document.getElementById("mail").value
 		};
-		let products = JSON.parse(localStorage.basketContent);
+		let basket = JSON.parse(localStorage.basketContent);
+		let products = basket.map((item) => item.id);
 		let toBeSent = {contact, products};
-		console.log(contact);
-		//sendRequest(toBeSent);
+	console.log(toBeSent);
+
 		//envoi POST request
 		var xhr = new XMLHttpRequest();
 		xhr.open('POST', 'http://localhost:3000/api/teddies/order');
     xhr.onreadystatechange = function() {
-      if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-      	var response = JSON.parse(this.response);
-        console.log(xhr.response);
-        //localStorage.setItem('orderId', response.orderId);
+      if (this.readyState == XMLHttpRequest.DONE) {
+      	let confirmation = JSON.parse(this.responseText);
+        console.log(confirmation);
+        localStorage.setItem('orderId', JSON.stringify(confirmation));
         //document.location.href = 'confirmation.html';
       } 
-      else {
+      /*else {
         alert('Une erreur est survenue');
-      }
+      }*/
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(toBeSent));
 	});
 }
 sendOrder();
-/*function sendRequest(toBeSent){
-	fetch (" http://localhost:3000/api/teddies/order", {
-  method: "POST",
-  body: JSON.stringify(toBeSent),
-  headers: {"Content-type": "application/json; charset=UTF-8"}
-});
-success:function sendRequest (response) {
-     console.log(JSON.parse(response));
-}*/
-
-
