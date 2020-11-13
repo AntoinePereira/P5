@@ -68,9 +68,10 @@ function addCommandButton(tedInfo){
 		
 		let product = {
 		'name' : tedInfo.name,
-		'price' : tedInfo.price
+		'price' : tedInfo.price,
+		'id' : tedInfo._id
 		};
-
+console.log(product);
 		basketContent.push(product);
 		localStorage.setItem('basketContent', JSON.stringify(basketContent));
 	});

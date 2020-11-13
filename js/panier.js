@@ -42,18 +42,18 @@ function sendOrder(tedInfo){
 		
 		//creation objets 'contact' et 'products'
 		let contact = {
-		'name' : document.getElementById("name").value,
-		'prenom' : document.getElementById("firstname").value,
-		'email' : document.getElementById("mail").value,
-		'adress' : document.getElementById("adress").value,
-		'city' : document.getElementById('city').value
+		'firstName' : document.getElementById("name").value,
+		'lastName' : document.getElementById("firstname").value,
+		'address' : document.getElementById("adress").value,
+		'city' : document.getElementById('city').value,
+		'email' : document.getElementById("mail").value
 		};
 		let products = JSON.parse(localStorage.basketContent);
 		let toBeSent = {contact, products};
-		console.log(toBeSent);
-		sendRequest(toBeSent);
+		console.log(contact);
+		//sendRequest(toBeSent);
 		//envoi POST request
-		/*var xhr = new XMLHttpRequest();
+		var xhr = new XMLHttpRequest();
 		xhr.open('POST', 'http://localhost:3000/api/teddies/order');
     xhr.onreadystatechange = function() {
       if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -67,11 +67,11 @@ function sendOrder(tedInfo){
       }
     };
     xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(toBeSent));*/
+    xhr.send(JSON.stringify(toBeSent));
 	});
 }
 sendOrder();
-function sendRequest(toBeSent){
+/*function sendRequest(toBeSent){
 	fetch (" http://localhost:3000/api/teddies/order", {
   method: "POST",
   body: JSON.stringify(toBeSent),
@@ -79,6 +79,6 @@ function sendRequest(toBeSent){
 });
 success:function sendRequest (response) {
      console.log(JSON.parse(response));
-}
+}*/
 
-}
+
