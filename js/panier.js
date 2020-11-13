@@ -77,7 +77,8 @@ function sendRequest(toBeSent){
   body: JSON.stringify(toBeSent),
   headers: {"Content-type": "application/json; charset=UTF-8"}
 });
-.then (response => response)
-.catch(error => console.log(error))
+success:function sendRequest (response) {
+     console.log(JSON.parse(response));
 }
 
+}
