@@ -6,7 +6,7 @@ function getId(){
 const id = getId();
 
 const request = new XMLHttpRequest();
-request.open("GET", " http://localhost:3000/api/teddies/" + id);
+request.open("GET", "http://localhost:3000/api/teddies/" + id);
 
 request.onreadystatechange = function() {
 	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
@@ -52,10 +52,14 @@ function addOptionSelector(tedInfo){
 	divParent.appendChild(colorSelector);
 
 	tedInfo.colors.forEach((color) =>{
-		const colorOption = document.createElement('option');
-		colorOption.innerHTML = color;
-		colorSelector.appendChild(colorOption);
+		addOptionToSelector(color, colorSelector)
 	})
+}
+
+function addOptionToSelector(color, colorSelector){
+	const colorOption = document.createElement('option');
+	colorOption.innerHTML = color;
+	colorSelector.appendChild(colorOption);
 }
 
 function addCommandButton(tedInfo){
@@ -63,17 +67,20 @@ function addCommandButton(tedInfo){
 	btn.addEventListener('click', function(){
 		let basketContent = JSON.parse(localStorage.getItem('basketContent'));
 		if (basketContent === null){
-		basketContent = [];
+			basketContent = [];
 		}
 		
-		let product = {
-		'name' : tedInfo.name,
-		'price' : tedInfo.price,
-		'id' : tedInfo._id
-		};
-console.log(product);
+		let product = getProductInfosForStorage(tedInfo);
+		
 		basketContent.push(product);
 		localStorage.setItem('basketContent', JSON.stringify(basketContent));
 	});
 }
 
+function getProductInfosForStorage(tedInfo){
+	return{
+	'name' : tedInfo.name,
+	'price' : tedInfo.price,
+	'id' : tedInfo._id
+	}
+};

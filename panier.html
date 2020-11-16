@@ -11,42 +11,42 @@
 <body>
 	<div class="container">
 		<header>
-			<div>
-				
 				<h1><i class="fa fa-shopping-cart" aria-hidden="true"></i> Orinoco</h1>
 				<nav>
 					<a href="index.html" title="Accueil du site Orinoco">Accueil</a>
 					<a href="panier.html" title="Accès a votre panier">Panier</a>
 				</nav>
-			</div>
 		</header>
 		<main>
 			<div id="divJS"></div>
 			<div>
 				<span>Prix total :</span>
 				<span id='total'></span>
-			<form>
+			</div>
+			<form id='form'>
 				<div>
 			    <label for="name">Nom :</label>
-			    <input type="text" id="name" >
+			    <input type="text" id="name" required>
 			  </div>
 			  <div>
 			    <label for="firstName">Prenom :</label>
-			    <input type="text" id="firstname">
+			    <input type="text" id="firstname" required>
 			  </div>
 			  <div>
 			   	<label for="mail">e-mail :</label>
-			    <input type="email" id="mail" >
+			    <input type="email" id="mail" required>
 			  </div>
 			  <div>
 			    <label for="adress">Adresse :</label>
-			    <input type="text" id="adress">
+			    <input type="text" id="adress" required>
 			  </div>
 			  <div>
 			    <label for="city">Ville :</label>
-			    <input type="text" id="city">
+			    <input type="text" id="city" required>
 			  </div>
+			  <div id='error'></div>
 			  <button type='submit' id='btn' >Je commande</button>
+			</form>
 		</main>
 		<footer>
 			<h2><i class="fa fa-shopping-cart" aria-hidden="true"></i> Orinoco</h2>
