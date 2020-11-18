@@ -49,7 +49,10 @@ function sendOrder(){
 		let basket = JSON.parse(localStorage.basketContent);
 		let products = basket.map((item) => item.id);
 		let toBeSent = {contact, products};
-		sendRequest(toBeSent);
+		if (regExpMail.test(document.getElementById("mail").value) == false){
+			alert('Adresse e-mail non valide');
+		}
+		else sendRequest(toBeSent);
 	});
 }
 sendOrder();
@@ -69,3 +72,5 @@ function sendRequest(toBeSent){
 }
 
 
+let regExpMail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
