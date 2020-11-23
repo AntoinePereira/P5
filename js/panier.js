@@ -1,6 +1,9 @@
 let basketContent = JSON.parse(localStorage.basketContent);
 let totalPrice = null;
 
+fillBasket();
+displayTotalPrice();
+sendOrder();
 function fillBasket(){
 	basketContent.forEach((item) => {
 		let divParent = document.getElementById('divJS');
@@ -11,8 +14,6 @@ function fillBasket(){
 		divParent.appendChild(divWrapper);
 	})
 }
-fillBasket();
-
 function addName(item, divParent){
 	let name = document.createElement('h3');
 	name.innerHTML = item.name;
@@ -23,7 +24,6 @@ function addPrice (item, divParent){
 	price.innerHTML = 'Prix : ' + item.price + '$';
 	divParent.appendChild(price);
 }
-	
 function displayTotalPrice(){
 	let divWrapper = document.getElementById('total');
 	basketContent.forEach(function(value, index, array){
@@ -32,30 +32,39 @@ function displayTotalPrice(){
 	divWrapper.innerHTML = totalPrice + '$';
 	localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
 }
-displayTotalPrice();
+
 
 function sendOrder(){
 	const form = document.getElementById('form');
 	form.addEventListener('submit', function(event){
 		event.preventDefault();
 		//creation objets 'contact' et 'products'
-		let contact = {
+		let contact = defineContact();
+		let basket = JSON.parse(localStorage.basketContent);
+		let products = basket.map((item) => item.id);
+		let toBeSent = {contact, products};
+		if (validEmail()){
+			sendRequest(toBeSent);
+		} else {
+			alert('Adresse e-mail non valide');
+		}
+	});
+}
+function defineContact(){
+	return{
 		'firstName' : document.getElementById("name").value,
 		'lastName' : document.getElementById("firstname").value,
 		'address' : document.getElementById("adress").value,
 		'city' : document.getElementById('city').value,
 		'email' : document.getElementById("mail").value
 		};
-		let basket = JSON.parse(localStorage.basketContent);
-		let products = basket.map((item) => item.id);
-		let toBeSent = {contact, products};
-		if (regExpMail.test(document.getElementById("mail").value) == false){
-			alert('Adresse e-mail non valide');
-		}
-		else sendRequest(toBeSent);
-	});
 }
-sendOrder();
+
+function validEmail(){
+	let regExpMail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);
+	return regExpMail.test(document.getElementById("mail").value);
+}
 
 function sendRequest(toBeSent){
 	var xhr = new XMLHttpRequest();
@@ -70,7 +79,3 @@ function sendRequest(toBeSent){
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(toBeSent));
 }
-
-
-let regExpMail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-);
