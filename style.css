@@ -12,6 +12,8 @@
 	align-items: center;
 } 
 header{
+	border-bottom: solid black 1px;
+	border-top: solid black 1px;
 	background-color: #f0e6f2;
 	width: 100vw;
 	text-align: center;
@@ -25,6 +27,15 @@ header nav{
 	display: flex;
 	justify-content: space-around;
 	padding: 1em;
+}
+nav div{
+	padding: 0.5em;
+	border: solid black 3px;
+	border-radius: 5px;
+}
+a{
+	text-decoration: none;
+	color: black;
 }
 main{
 	min-height: 60vh;
@@ -41,6 +52,8 @@ main{
 	width: 60vw;
 }
 footer{
+	border-bottom: solid black 1px;
+	border-top: solid black 1px;
 	background-color: #f0e6f2;
 	width: 100vw;
 	display: flex;
@@ -71,4 +84,12 @@ footer p{
 }
 #productContainer div{
 	margin: 1em;
+}
+
+#confirmation{
+	display: flex;
+}
+#confirmationJS {
+	padding-top: 15vh;
+	color: red;
 }

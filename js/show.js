@@ -69,11 +69,11 @@ function addCommandButton(tedInfo){
 		if (basketContent === null){
 			basketContent = [];
 		}
-		
 		let product = getProductInfosForStorage(tedInfo);
 		
 		basketContent.push(product);
 		localStorage.setItem('basketContent', JSON.stringify(basketContent));
+		alert('Produit ajouté au panier');
 	});
 }
 
