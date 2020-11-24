@@ -78,6 +78,9 @@ footer p{
 	margin-block-start: 0.5em;
     margin-block-end: 0.5em;
 }
+#panierVide{
+	padding: 3em;
+}
 #productContainer img{
 	max-width: 80vw;
 	margin: 2em;
@@ -91,5 +94,4 @@ footer p{
 }
 #confirmationJS {
 	padding-top: 15vh;
-	color: red;
 }

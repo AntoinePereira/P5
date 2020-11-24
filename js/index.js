@@ -14,8 +14,7 @@ requestTeddies.onreadystatechange = function() {
 	    addTitle(item, divWrapper);
 	    addImageInLink(item, divWrapper);
 	    
-
-	    divParent.appendChild(divWrapper);
+		divParent.appendChild(divWrapper);
     })
   }
 }
@@ -23,7 +22,6 @@ requestTeddies.onerror = function(){
 	let divParent = document.getElementById('divJS');
 	divParent.innerHTML = "<h1>ERROR</h1>";
 }
-
 requestTeddies.send();
 
 function addTitle(item, divParent){

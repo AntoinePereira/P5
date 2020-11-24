@@ -11,7 +11,6 @@ request.open("GET", "http://localhost:3000/api/teddies/" + id);
 request.onreadystatechange = function() {
 	if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
 	  const tedInfo = JSON.parse(this.responseText);
-
 		addProduct(tedInfo);
 		addOptionSelector(tedInfo);
 		addCommandButton(tedInfo);
@@ -76,7 +75,6 @@ function addCommandButton(tedInfo){
 		alert('Produit ajouté au panier');
 	});
 }
-
 function getProductInfosForStorage(tedInfo){
 	return{
 	'name' : tedInfo.name,

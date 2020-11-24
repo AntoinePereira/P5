@@ -1,9 +1,14 @@
+if (localStorage.basketContent == null){
+	let divParent = document.getElementById('panierVide');
+	divParent.innerHTML = 'Votre panier est vide';
+}
 let basketContent = JSON.parse(localStorage.basketContent);
 let totalPrice = null;
 
 fillBasket();
 displayTotalPrice();
 sendOrder();
+
 function fillBasket(){
 	basketContent.forEach((item) => {
 		let divParent = document.getElementById('divJS');
@@ -33,12 +38,10 @@ function displayTotalPrice(){
 	localStorage.setItem('totalPrice', JSON.stringify(totalPrice));
 }
 
-
 function sendOrder(){
 	const form = document.getElementById('form');
 	form.addEventListener('submit', function(event){
 		event.preventDefault();
-		//creation objets 'contact' et 'products'
 		let contact = defineContact();
 		let basket = JSON.parse(localStorage.basketContent);
 		let products = basket.map((item) => item.id);
@@ -61,14 +64,13 @@ function defineContact(){
 }
 
 function validEmail(){
-	let regExpMail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-);
+	let regExpMail = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 	return regExpMail.test(document.getElementById("mail").value);
 }
 
 function sendRequest(toBeSent){
 	var xhr = new XMLHttpRequest();
-		xhr.open('POST', 'http://localhost:3000/api/teddies/order');
+	xhr.open('POST', 'http://localhost:3000/api/teddies/order');
     xhr.onreadystatechange = function() {
       if (this.readyState == XMLHttpRequest.DONE) {
       	let confirmation = JSON.parse(this.responseText);
